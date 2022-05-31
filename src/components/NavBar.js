@@ -1,17 +1,15 @@
-const Nav = () => {
+import Brand from './Brand';
+import Nav from './Nav';
+
+const NavBar = () => {
     return (
         <>
-            <nav>
-                <ul>
-                    <li><a href="">Deportes</a></li>
-                    <li><a href="">Belicos</a></li>
-                    <li><a href="">Rol</a></li>
-                    <li><a href="">Autos</a></li>
-                    <li><a href="">Shooting</a></li>
-                </ul>
-            </nav>
+        <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <Brand />
+        </a>
+        <Nav />
         </>
     )
 }
 
-export default Nav
+export default NavBar

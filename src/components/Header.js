@@ -5,14 +5,11 @@ import '../css/header.css';
 const Header = () => {
     return (
         <>
-            <header className="header">
-                <div className="header-col">
-                    <Brand />
-                </div>
-                <div className="header-col">
-                    <NavBar />
-                </div>
+        <div className="container">
+            <header className="d-flex flex-wrap align-items-center justify-content-center py-3 mb-4 border-bottom">
+                <NavBar />
             </header>
+        </div>
         </>
     )
 }
