@@ -1,0 +1,14 @@
+.cover {
+    max-width: 100%;
+}
+@media (min-width: 768px){
+    /* .producto .flex-md-row {
+        flex-wrap: nowrap;
+    }
+    .col {
+        width: 50%;
+    }
+    .col-auto {
+        width: 50%;
+    } */
+}
