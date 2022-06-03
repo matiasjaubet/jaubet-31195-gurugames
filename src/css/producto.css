@@ -1,6 +1,24 @@
 .cover {
     max-width: 100%;
 }
+
+.ItemListContainer__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ItemListContainer__box .btn {
+    width: 40px;
+    border: 1px solid #f1f1f1;
+}
+.ItemListContainer__box p {
+    width: 50px;
+    margin: 0;
+}
+.btn-primary {
+    width: 100%;
+}
+
 @media (min-width: 768px){
     /* .producto .flex-md-row {
         flex-wrap: nowrap;
