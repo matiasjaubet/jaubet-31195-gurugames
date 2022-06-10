@@ -1,6 +1,8 @@
 import ItemList from '../ItemList/ItemList';
 import { useEffect, useState } from 'react';
 import './ItemListContainer.css';
+import {productos} from './productos';
+
 
 const ItemListContainer = () => {
 
@@ -8,14 +10,23 @@ const ItemListContainer = () => {
 
     useEffect(() => {
 
+        // fetch("https://fakestoreapi.com/products")
+        //     .then((respuesta)=> {
+        //         const p = respuesta.json();
+        //         return p
+        //     })
+        //     .then((productos) => {
+        //         console.log(productos)
+        //         setItems(productos)
+        //     })
+        //     .catch((error => {
+        //         console.log("Cagaste hermano...")
+        //     }))
+
+
         const MocAsync = new Promise((res) => {
             setTimeout(() => {
-                const productosDeDB = [
-                    { id: 1, nombre: 'Deathloop', precio: "$8.900.-", stock: 12, portada: '../images/covers/deathloop.jpg'},
-                    { id: 2, nombre: 'Returnal', precio: "$5.000.-", stock: 10, portada: '../images/covers/returnal.jpg'},
-                    { id: 3, nombre: 'Uncharted', precio: "$5.200.-", stock: 20, portada: '../images/covers/uncharted.jpg'},
-                    { id: 4, nombre: 'Death Stranding', precio: "$12.000.-", stock: 2, portada: '../images/covers/death.jpg'},
-                ]
+                const productosDeDB = productos
                 res(productosDeDB)
             }, 2000)
         })
