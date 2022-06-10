@@ -18,7 +18,7 @@ const ItemDetail = ({id, nombre, precio, stock, portada, descripcion, categoria}
                 <div className="row g-0 rounded overflow-hidden mb-4 h-md-250 position-relative">
                     <div className="col p-4 pt-10 d-flex flex-column text-left">
                         <h3 className="fs-2 tmb-0 text-left">{nombre } <small>({stock})</small></h3>
-                        <small className="fs-7 display-block mb-2">Categoria: <a href="">{categoria}</a></small>
+                        <small className="fs-7 display-block mb-2">Categoria: <a href="#">{categoria}</a></small>
                         <p>{descripcion}</p>
                     </div>
                 </div>
