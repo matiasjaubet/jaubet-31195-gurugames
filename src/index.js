@@ -3,9 +3,9 @@ import React from 'react';
 //Con ReactDOM puedo visualizar react en un navegador 
 import ReactDOM from 'react-dom/client';
 //Agarrar una app que ya exista de REACT
-import App from './App';
+import App from './ui/layout/app/App';
 
-import "./css/index.css";
+import "./assets/css/index.css";
 
 
 // mostramos la aplicacion
