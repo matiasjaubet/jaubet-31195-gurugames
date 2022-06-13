@@ -35,4 +35,14 @@ export const productos = [
             portada: '../images/covers/death.jpg',
             descripcion: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, et quia est ullam quod veniam. Nemo animi, explicabo eum, quis sit?'
         },
-]
+];
+
+export const producto = {
+    id: 4, 
+    nombre: 'Death Stranding', 
+    categoria: 'Accion',
+    precio: "$12.000.-", 
+    stock: 2, 
+    portada: '../images/covers/death.jpg',
+    descripcion: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, et quia est ullam quod veniam. Nemo animi, explicabo eum, quis sit?'
+}

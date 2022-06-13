@@ -1,37 +1,31 @@
 
 import { useEffect, useState } from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { productos } from '../ItemListContainer/productos';
+import { producto } from '../ItemListContainer/productos';
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({id, nombre, categoria, descripcion, precio, stock, portada}) => {
 
-    const [items, setItems] = useState([]);
+    const [item, setItem] = useState({});
 
     useEffect(() => {
 
         const MocAsync = new Promise((res) => {
             setTimeout(() => {
-                const productosDeDB = productos
-                res(productosDeDB)
+                const productoDeDB = producto
+                res(productoDeDB)
             }, 2000)
         })
 
-        MocAsync.then(items => {
-            setItems(items)
+        MocAsync.then(item => {
+            setItem(item)
         })
-
+        
     },[])
 
+    console.log(item)
+
   return (
-    <div>
-        {
-            items.map(({ nombre, precio, stock, portada, id, descripcion, categoria }) => {
-                if (id === 3) {
-                    return <ItemDetail id={id} nombre={nombre} categoria={categoria} descripcion={descripcion} precio={precio} stock={stock} portada={portada} />
-                }
-            })
-        }
-    </div>
+        <ItemDetail item={item} />
   )
 }
 
