@@ -15,7 +15,6 @@ const ItemListContainer = () => {
     useEffect(() => {
      
         if(resultado.id === undefined) {
-            alert('hi')
             const MocAsync = new Promise((res) => {
                 setTimeout(() => {
                     const productosDeDB = productos
@@ -32,7 +31,7 @@ const ItemListContainer = () => {
                     if (productosDeDB.length > 0) {
                         res(productosDeDB)
                     } else {
-                        alert('Nothing')
+                        alert('No hay juegos de Simulación');
                     }
                     
                 }, 2000)
@@ -62,7 +61,7 @@ const ItemListContainer = () => {
             <>
              <div className="container">
                 <div className="row my-5 py-4 text-center">
-                    <h3>Cargando productos...</h3>
+                    <h3 className='mensaje'>Cargando productos...</h3>
                 </div>
             </div>
             </>
