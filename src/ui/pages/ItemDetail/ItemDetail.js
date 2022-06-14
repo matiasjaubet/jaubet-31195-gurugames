@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount"
 import './ItemDetail.css';
 
@@ -23,7 +24,7 @@ const ItemDetail = ({item}) => {
                 <div className="row g-0 rounded overflow-hidden mb-4 h-md-250 position-relative">
                     <div className="col p-4 pt-10 d-flex flex-column text-left">
                         <h3 className="fs-2 tmb-0 text-left">{item.nombre } <small>({item.stock})</small></h3>
-                        <small className="fs-7 display-block mb-2">Categoria: <a href="#">{item.categoria}</a></small>
+                        <small className="fs-7 display-block mb-2">Categoria: <Link to="{item.categoria}">{item.categoria}</Link></small>
                         <p>{item.descripcion}</p>
                     </div>
                 </div>

@@ -2,40 +2,49 @@ import ItemList from '../ItemList/ItemList';
 import { useEffect, useState } from 'react';
 import './ItemListContainer.css';
 import {productos} from './productos';
+import { useParams } from 'react-router-dom';
 
 
 const ItemListContainer = () => {
 
     const [items, setItems] = useState([]);
 
+    const resultado = useParams();
+    console.log(resultado.id)
+
     useEffect(() => {
+     
+        if(resultado.id === undefined) {
+            alert('hi')
+            const MocAsync = new Promise((res) => {
+                setTimeout(() => {
+                    const productosDeDB = productos
+                    res(productosDeDB)
+                }, 2000)
+            })
+            MocAsync.then(items => {
+                setItems(items)
+            })
+        } else {
+            const MocAsync = new Promise((res) => {
+                setTimeout(() => {
+                    const productosDeDB = productos.filter((item) => item.categoria === resultado.id);
+                    if (productosDeDB.length > 0) {
+                        res(productosDeDB)
+                    } else {
+                        alert('Nothing')
+                    }
+                    
+                }, 2000)
+            })
+            MocAsync.then(items => {
+                setItems(items)
+            })
+        }
 
-        // fetch("https://fakestoreapi.com/products")
-        //     .then((respuesta)=> {
-        //         const p = respuesta.json();
-        //         return p
-        //     })
-        //     .then((productos) => {
-        //         console.log(productos)
-        //         setItems(productos)
-        //     })
-        //     .catch((error => {
-        //         console.log("Cagaste hermano...")
-        //     }))
+        console.log(resultado.id)
 
-
-        const MocAsync = new Promise((res) => {
-            setTimeout(() => {
-                const productosDeDB = productos
-                res(productosDeDB)
-            }, 2000)
-        })
-
-        MocAsync.then(items => {
-            setItems(items)
-        })
-
-    },[])
+    },[resultado.id])
 
 
     if(items.length > 0) {
