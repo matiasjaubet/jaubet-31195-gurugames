@@ -22,7 +22,7 @@ const ItemDetail = ({item}) => {
 
     if(loading) {
         return (
-        <Spinner />
+        <Spinner mensaje="Cargando información del juego..." />
     )
     } else {
         return (
