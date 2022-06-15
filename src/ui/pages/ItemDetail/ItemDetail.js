@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount"
 import './ItemDetail.css';
-
+import Spinner from '../../widget/Spinner/Spinner';
 
 const ItemDetail = ({item}) => {
 
@@ -9,13 +10,29 @@ const ItemDetail = ({item}) => {
         alert('Haría lo que haga falta, chequear si esta Ok o no.')
     }
 
-    return (
+    const [loading, setLoading] = useState(true);
 
-    <div className="container">
+    useEffect(() => {
+        setTimeout(()=> {
+            setLoading(false);
+        }, 2000)
+    })
+
+    
+
+    if(loading) {
+        return (
+        <Spinner />
+    )
+    } else {
+        return (
+
+        
+        <div className="container">
         <div className="row">
             <div className="col-md-3">
                 <div className="row g-0 rounded overflow-hidden mb-4 h-md-250 position-relative">
-                    <div className="col-auto d-none d-lg-block">
+                    <div className="col-auto">
                         <img src={item.portada} className="cover" alt="" />
                     </div>
                 </div>
@@ -39,7 +56,8 @@ const ItemDetail = ({item}) => {
             </div>
         </div>
     </div>
-  )
+    )
+    }
 }
 
 export default ItemDetail

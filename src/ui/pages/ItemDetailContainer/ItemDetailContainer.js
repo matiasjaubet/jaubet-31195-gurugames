@@ -1,18 +1,22 @@
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { producto } from '../ItemListContainer/productos';
+import { productos } from '../ItemListContainer/productos';
 
-const ItemDetailContainer = ({id, nombre, categoria, descripcion, precio, stock, portada}) => {
+
+const ItemDetailContainer = () => {
 
     const [item, setItem] = useState({});
+    const {id} = useParams();
+    const idToNumber = parseInt(id);
 
     useEffect(() => {
 
         const MocAsync = new Promise((res) => {
             setTimeout(() => {
-                const productoDeDB = producto
-                res(productoDeDB)
+                const productoDeDB = productos
+                res(productoDeDB.find(prod => prod.id === idToNumber))
             }, 2000)
         })
 
@@ -20,9 +24,7 @@ const ItemDetailContainer = ({id, nombre, categoria, descripcion, precio, stock,
             setItem(item)
         })
         
-    },[])
-
-    console.log(item)
+    },[idToNumber])
 
   return (
         <ItemDetail item={item} />

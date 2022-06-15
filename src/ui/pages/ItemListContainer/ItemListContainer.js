@@ -2,15 +2,19 @@ import ItemList from '../ItemList/ItemList';
 import { useEffect, useState } from 'react';
 import './ItemListContainer.css';
 import {productos} from './productos';
-import { useParams } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
+import Spinner from '../../widget/Spinner/Spinner';
 
 const ItemListContainer = () => {
 
     const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const cambiarEstado = () => {
+        setLoading(false);
+    }
 
     const resultado = useParams();
-    console.log(resultado.id)
 
     useEffect(() => {
      
@@ -19,6 +23,7 @@ const ItemListContainer = () => {
                 setTimeout(() => {
                     const productosDeDB = productos
                     res(productosDeDB)
+                    cambiarEstado()
                 }, 2000)
             })
             MocAsync.then(items => {
@@ -28,12 +33,8 @@ const ItemListContainer = () => {
             const MocAsync = new Promise((res) => {
                 setTimeout(() => {
                     const productosDeDB = productos.filter((item) => item.categoria === resultado.id);
-                    if (productosDeDB.length > 0) {
-                        res(productosDeDB)
-                    } else {
-                        alert('No hay juegos de Simulación');
-                    }
-                    
+                    res(productosDeDB)
+                    cambiarEstado()
                 }, 2000)
             })
             MocAsync.then(items => {
@@ -41,31 +42,36 @@ const ItemListContainer = () => {
             })
         }
 
-        console.log(resultado.id)
-
     },[resultado.id])
 
-
-    if(items.length > 0) {
+    if(loading) {
         return (
-            <>
-            <div className="container">
-                <div className="row mb-2">
-                    <ItemList productos={items} />
-                </div>
-            </div>
-            </>
-            )
+            <Spinner mensaje="Paciencia, cargando juegos para vos..." />
+        )
     } else {
         return (
             <>
-             <div className="container">
+            {items.length === 0 
+            ?
+            <div className="container">
                 <div className="row my-5 py-4 text-center">
-                    <h3 className='mensaje'>Cargando productos...</h3>
+                   
+                    <p className='mensaje'><span className="icon">😕 </span>No hay productos para mostrar...<br />Pero no llores, tienen muchas más opciones para elegir. <br />Solo debés saber <b>cuál</b> elegir.</p>
+                    <Link to="/" className="btn btn-primary btn-volver" >Ir al Inicio</Link>
                 </div>
             </div>
+            :
+            <div className="container">
+                <div className="row my-5 py-4 text-center">
+                    {/* {
+                        items?.length < 0 ? <p>No hay nada che</p> : <ItemList productos={items} />
+                    } */}
+                    <ItemList productos={items} />
+                </div>
+            </div>
+            }
             </>
-        )
+            )
     }
 }
 
