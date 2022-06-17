@@ -10,7 +10,7 @@ const Carrito = () => {
         Gracias!</p>
         <div className="col-md-5"></div>
         <div className="col-md-2">
-        <Link to="/" className="btn btn-primary mt-5">Ir al incio</Link>
+        <Link to="/" className="btn btn-primary mt-5">Ir al inicio</Link>
         </div>
         <div className="col-md-5"></div>
     </div>
