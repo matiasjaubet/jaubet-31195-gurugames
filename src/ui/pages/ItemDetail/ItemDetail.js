@@ -6,8 +6,11 @@ import Spinner from '../../widget/Spinner/Spinner';
 
 const ItemDetail = ({item}) => {
 
-    const confirmarContador = () => {
-        alert('Haría lo que haga falta, chequear si esta Ok o no.')
+    const [cantidad, setCantidad] = useState("");
+    console.log('Primera: ' + cantidad)
+
+    const onAdd = (cantidadSeleccionada) => {
+        setCantidad(cantidadSeleccionada)
     }
 
     const [loading, setLoading] = useState(true);
@@ -16,15 +19,15 @@ const ItemDetail = ({item}) => {
         setTimeout(()=> {
             setLoading(false);
         }, 2000)
-    })
+    },[setCantidad])
 
-    
 
     if(loading) {
         return (
         <Spinner mensaje="Cargando información del juego..." />
-    )
+        )
     } else {
+
         return (
 
         
@@ -50,7 +53,14 @@ const ItemDetail = ({item}) => {
                 <div className="row g-0 rounded overflow-hidden mb-4 h-md-250 position-relative">
                     <div className="col p-4 pt-10 d-flex flex-column text-left">
                         <p className="card-text mb-auto precio font-weight-bold">{item.precio}</p>
-                        <ItemCount stock={item.stock} initial={1} onAdd={confirmarContador} />
+                     
+                        {cantidad.length !== 0  
+                        ?
+                        <Link to="/carrito" className="btn btn-primary mt-5">Terminar mi compra</Link>
+                        :
+                        <ItemCount stock={item.stock} initial={1} onAdd={onAdd} />
+                        }
+
                     </div>
                 </div>
             </div>

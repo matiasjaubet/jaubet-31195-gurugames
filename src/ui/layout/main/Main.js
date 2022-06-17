@@ -2,6 +2,7 @@ import ItemDetailContainer from "../../pages/ItemDetailContainer/ItemDetailConta
 import ItemListContainer from "../../pages/ItemListContainer/ItemListContainer";
 import { Route, Routes } from "react-router-dom";
 import Hero from "../../pages/Hero/Hero";
+import Carrito from "../../pages/Carrito/Carrito"
 
 const Main = () => {
   return (
@@ -16,13 +17,8 @@ const Main = () => {
           } />
         <Route exact path="/category/:id" element={ <ItemListContainer /> } />
         <Route exact path="/item/:id" element={ <ItemDetailContainer /> } />
+        <Route exact path="/carrito" element={ <Carrito /> } />
       </Routes>
-  
-      {/* <ItemListContainer />
-      <hr />
-      <h4 className="text-center my-5">(Desafío: Mostramos un solo producto)</h4>
-      <ItemDetailContainer /> */}
-    
 
     </main>
   )
