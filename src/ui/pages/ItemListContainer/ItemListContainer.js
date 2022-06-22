@@ -54,7 +54,7 @@ const ItemListContainer = () => {
             {items.length === 0 
             ?
             <div className="container">
-                <div className="row my-5 py-4 text-center">
+                <div className="row mb-5 py-4 text-center">
                    
                     <p className='mensaje'><span className="icon">😕 </span>No hay productos para mostrar...<br />Pero no llores, tienen muchas más opciones para elegir. <br />Solo debés saber <b>cuál</b> elegir.</p>
                     <Link to="/" className="btn btn-primary btn-volver" >Ir al Inicio</Link>
@@ -62,7 +62,7 @@ const ItemListContainer = () => {
             </div>
             :
             <div className="container">
-                <div className="row my-5 py-4 text-center">
+                <div className="row text-center">
                     {/* {
                         items?.length < 0 ? <p>No hay nada che</p> : <ItemList productos={items} />
                     } */}

@@ -1,0 +1,17 @@
+.CartWidgetBox {
+    position: relative;
+}
+.quantity {
+    background-color: #0d6efd;
+    color: white;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 12px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+}

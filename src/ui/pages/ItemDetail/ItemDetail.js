@@ -1,17 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import ItemCount from "../ItemCount/ItemCount"
 import './ItemDetail.css';
 import Spinner from '../../widget/Spinner/Spinner';
 
+import { context } from "../../../api/CartContext/CartContext";
+
 const ItemDetail = ({item}) => {
 
+    const resultado = useContext(context);
+    
     const [cantidad, setCantidad] = useState("");
-    console.log('Primera: ' + cantidad)
+    const [item2, setItem2] = useState(item);
+   
 
-    const onAdd = (cantidadSeleccionada) => {
-        setCantidad(cantidadSeleccionada)
+
+    const onAdd = (quantity) => {
+        setCantidad(quantity);
+        setItem2(item);
+        resultado.addItem(quantity);
+        resultado.addGame(...[item]);
     }
+
+    console.log('Primera: ' + cantidad)
+    console.log('Juego: ', item)
+
+
+
+    // SPINNER / LOADING
 
     const [loading, setLoading] = useState(true);
 
@@ -19,7 +35,7 @@ const ItemDetail = ({item}) => {
         setTimeout(()=> {
             setLoading(false);
         }, 2000)
-    },[setCantidad])
+    },[setCantidad,setItem2])
 
 
     if(loading) {
