@@ -10,49 +10,68 @@ const CartContext = ({children}) => {
     const [cantidad_total, setCantidad_total] = useState(0);
     const [carrito, setCarrito] = useState([]);
 
-    // AGREGAR SOLO CANTIDAD
-
-    const addItem = (cantidadSeleccionada) => {
-        setCantidad_total( cantidad_total + cantidadSeleccionada);
-    }
 
     // AGREGAR PRODUCTO Y CHEQUEAR QUE NO ESTE REPETIDO
 
-    const addGame = (item) => {
-        if(carrito.find(x => x.id === item.id)) {
-            alert('No podés comprar dos productos iguales.')
+    const addGame = (item, quantity) => {
+
+        const nuevoJuego = { item, quantity };
+
+        // SI EL CARRITO ESTA VACIO...
+        if (carrito.length === 0) {
+
+            // AGREGAMOS EL PRODUCTO DE UNA Y SUMAMOS LA CANTIDAD AL WIDGETCART
+            setCarrito(current => [...current, nuevoJuego]);
+            setCantidad_total(cantidad_total + quantity);
+        
+        // SI NO ESTÁ VACIO...
         } else {
-            setCarrito(current => [...current, item])
+
+            // BUSCAMOS SI YA LO HABIAMOS AGREGADO...
+            if(carrito.find(x => x.item.id === nuevoJuego.item.id)) {
+                
+                //ENCONTRAMOS EL MISMO PRODUCTO. ES HORA DE VALIDAR EL STOCK...
+                const cantidadAnterior = carrito.find(x => x.item.id === nuevoJuego.item.id);
+
+                if(cantidadAnterior.quantity + quantity <= cantidadAnterior.item.stock) {
+                    cantidadAnterior.quantity += quantity;
+                    setCantidad_total(cantidad_total + quantity)
+                } else {
+                    alert("No hay suficiente stock...");
+                }
+            
+            // PERO SI NO ENCONTRAMOS EL PRODUCTO AGREGADO, LO AGREGAMOS DE UNA...
+            } else {
+                setCarrito(current => [...current, nuevoJuego]);
+                setCantidad_total(cantidad_total + quantity)
+            }
+
         }
+        
     }
 
-    // BORRAR PRODUCTO POR ID
+    // BORRAR PRODUCTO POR ID Y RESTAR CANTIDAD DEL WIDGET CART
 
-    const removeItem = (id) => {
-        const newList = carrito.filter((item) => item.id !== id);
+    const removeItem = (id, quantity ) => {
+        const newList = carrito.filter((x) => x.item.id !== id);
         setCarrito(newList);
+        setCantidad_total(cantidad_total - quantity)
     }
 
     // VALOR DEL CONTEXTO (PROPS)
 
     const valorDelContexto = {
-        addItem : addItem,
-        cantidadSeleccionada: cantidad_total,
-
-        addGame : addGame,
+        quantity: cantidad_total,
         item: carrito,
-
+        addGame : addGame,
         removeItem : removeItem,
-
     }
-
-    console.log("Valor del contexto", valorDelContexto)
 
     return (
         <Provider value={valorDelContexto}>
             {children}
         </Provider>
-  )
+    )
 }
 
 export default CartContext

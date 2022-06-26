@@ -3,7 +3,7 @@ export const productos = [
             id: 1, 
             nombre: 'Deathloop',
             categoria: 'accion',
-            precio: '$8.900.-', 
+            precio: '$8.900.-',
             stock: 12, 
             portada: '../images/covers/deathloop.jpg',
             descripcion: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, et quia est ullam quod veniam. Nemo animi, ipsum ducimus maiores minima eos doloribus nulla numquam nihil, explicabo eum, quis sit?'

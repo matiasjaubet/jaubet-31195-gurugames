@@ -8,24 +8,13 @@ import { context } from "../../../api/CartContext/CartContext";
 
 const ItemDetail = ({item}) => {
 
-    const resultado = useContext(context);
-    
+    const resultado = useContext(context);    
     const [cantidad, setCantidad] = useState("");
-    const [item2, setItem2] = useState(item);
-   
-
 
     const onAdd = (quantity) => {
         setCantidad(quantity);
-        setItem2(item);
-        resultado.addItem(quantity);
-        resultado.addGame(...[item]);
+        resultado.addGame(item, quantity);
     }
-
-    console.log('Primera: ' + cantidad)
-    console.log('Juego: ', item)
-
-
 
     // SPINNER / LOADING
 
@@ -35,7 +24,7 @@ const ItemDetail = ({item}) => {
         setTimeout(()=> {
             setLoading(false);
         }, 2000)
-    },[setCantidad,setItem2])
+    },[setCantidad])
 
 
     if(loading) {
@@ -46,7 +35,6 @@ const ItemDetail = ({item}) => {
 
         return (
 
-        
         <div className="container">
         <div className="row">
             <div className="col-md-3">

@@ -8,7 +8,7 @@ const CartWidget = () => {
   const resultado = useContext(context);
 
   return (
-    <Link to="/carrito" className="CartWidgetBox"><span className="material-symbols-outlined">shopping_cart</span><span className="quantity">{resultado.cantidadSeleccionada}</span></Link>
+    <Link to="/carrito" className="CartWidgetBox"><span className="material-symbols-outlined">shopping_cart</span><span className="quantity">{resultado.quantity}</span></Link>
   )
 }
 
