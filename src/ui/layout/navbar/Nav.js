@@ -1,6 +1,21 @@
+import React, { useContext, useEffect, useState } from "react";
 import CartWidget from "../../widget/CartWidget/CartWidget"
 import {NavLink } from "react-router-dom";
+import { context } from "../../../api/CartContext/CartContext";
 const Nav = () => {
+
+    const resultado = useContext(context);
+    const [carrito, setCarrito] = useState(false);
+    
+    const estadoCarrito = resultado.item.length;
+    useEffect(() => {
+      if (estadoCarrito === 0) {
+        setCarrito(false)
+      } else {
+        setCarrito(true)
+      }
+    },[estadoCarrito])
+
     return (
         <>
             <nav>
@@ -11,7 +26,8 @@ const Nav = () => {
                     <li className="nav-item"><NavLink className="nav-link" to="/category/simulacion">Simulación</NavLink></li>
                 </ul>
             </nav>
-            <CartWidget />
+            {carrito ? <CartWidget /> : "" }
+            
         </>
     )
 }

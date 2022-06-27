@@ -11,7 +11,7 @@ const Main = () => {
       <Routes>
         <Route exact path="/" element={ 
           <>
-            <Hero greeting="Pedile la tarjeta a tus viejos, es hora de viciar!" copy="Potencia tu experiencia PlayStation con multijugador en línea, juegos mensuales, descuentos exclusivos y mucho más."/> 
+            <Hero greeting="Es hora de viciar!" copy="Potencia tu experiencia PlayStation con multijugador en línea, juegos mensuales, descuentos exclusivos y mucho más."/> 
             <ItemListContainer />
           </>
           } />
