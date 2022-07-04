@@ -53,7 +53,6 @@ const Carrito = () => {
         email: usuario.email
       },
       formatedCart,
-      totalPrice: resultado.totalPrice(),
       date: serverTimestamp()
     }
 
