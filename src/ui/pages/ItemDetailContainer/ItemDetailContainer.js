@@ -1,30 +1,27 @@
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { productos } from '../ItemListContainer/productos';
+
+import { doc, getDoc } from 'firebase/firestore';
+import { collectionProd } from '../../../api/firebase/firebase';
 
 
 const ItemDetailContainer = () => {
 
     const [item, setItem] = useState({});
     const {id} = useParams();
-    const idToNumber = parseInt(id);
-
+    // const idToNumber = parseInt(id);
     useEffect(() => {
 
-        const MocAsync = new Promise((res) => {
-            setTimeout(() => {
-                const productoDeDB = productos
-                res(productoDeDB.find(prod => prod.id === idToNumber))
-            }, 2000)
-        })
+        const ref = doc(collectionProd, id);
+        getDoc(ref).then((response) => {
+            setItem({
+                id: response.id,
+                ...response.data(),
+            });
+        });
 
-        MocAsync.then(item => {
-            setItem(item)
-        })
-        
-    },[idToNumber])
+    },[id])
 
   return (
         <ItemDetail item={item} />

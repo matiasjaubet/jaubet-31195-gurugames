@@ -2,29 +2,20 @@ import { useState } from "react"
 
 const Form = () => {
 
-    const [nombre, setNombre] = useState("");
-    const [telefono, setTelefono] = useState("");
-    const [email, setEmail] = useState("");
-    
+    const [usuario, setUsuario] = useState({
+        nombre: "",
+        telefono: "",
+        email: ""
+    })
     const handleSubmit = (e) => {
         e.preventDefault();
-        const usuario = { nombre, telefono, email }
+    }
+    const handleChange = (e) => {
+        const copia = {...usuario}
+        copia[e.target.id] = e.target.value
+        setUsuario(copia)
         console.log(usuario)
     }
-
-    const handleNombreChange = (e) => {
-        setNombre(e.target.value)
-    }
-
-    const handleTelefonoChange = (e) => {
-        setTelefono(e.target.value)
-    }
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value)
-    }
-
-
     return (
     <>
         <div className="container mt-5">
@@ -34,13 +25,13 @@ const Form = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-sm-4 mb-3">
-                            <input onChange={handleNombreChange} name="nombre" type="text" className="form-control" placeholder="Nombre y Apellido" />
+                            <input onChange={handleChange} id="nombre" autoComplete="off" type="text" className="form-control" placeholder="Nombre y Apellido" />
                         </div>
                         <div className="col-12 col-sm-4 mb-3">
-                            <input onChange={handleTelefonoChange} name="telefono" type="text" className="form-control" placeholder="Teléfono" />
+                            <input onChange={handleChange} id="telefono" autoComplete="off" type="text" className="form-control" placeholder="Teléfono" />
                         </div>
                         <div className="col-12 col-sm-4 mb-3">
-                            <input onChange={handleEmailChange} name="" type="email" className="form-control" placeholder="E-Mail" />
+                            <input onChange={handleChange} id="email" autoComplete="off" type="email" className="form-control" placeholder="E-Mail" />
                         </div>
                         <div className="col-12">
                             <button type="submit" className="btn btn-primary display-inline-block">Enviar datos</button>

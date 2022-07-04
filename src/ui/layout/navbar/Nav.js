@@ -24,6 +24,7 @@ const Nav = () => {
                     <li className="nav-item"><NavLink className="nav-link" to="/category/rol">Rol</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" to="/category/deportes">Deportes</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" to="/category/simulacion">Simulación</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to="/category/aventura">Aventura</NavLink></li>
                 </ul>
             </nav>
             {carrito ? <CartWidget /> : "" }

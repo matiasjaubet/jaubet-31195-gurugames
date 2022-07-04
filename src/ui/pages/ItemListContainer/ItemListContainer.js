@@ -1,46 +1,41 @@
 import ItemList from '../ItemList/ItemList';
 import { useEffect, useState } from 'react';
 import './ItemListContainer.css';
-import {productos} from './productos';
 import { Link, useParams } from 'react-router-dom';
 import Spinner from '../../widget/Spinner/Spinner';
+
+import { collectionProd } from '../../../api/firebase/firebase';
+import { getDocs, query, where } from 'firebase/firestore';
+
 
 const ItemListContainer = () => {
 
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const cambiarEstado = () => {
-        setLoading(false);
-    }
-
     const resultado = useParams();
 
     useEffect(() => {
      
-        if(resultado.id === undefined) {
-            const MocAsync = new Promise((res) => {
-                setTimeout(() => {
-                    const productosDeDB = productos
-                    res(productosDeDB)
-                    cambiarEstado()
-                }, 2000)
-            })
-            MocAsync.then(items => {
-                setItems(items)
-            })
-        } else {
-            const MocAsync = new Promise((res) => {
-                setTimeout(() => {
-                    const productosDeDB = productos.filter((item) => item.categoria === resultado.id);
-                    res(productosDeDB)
-                    cambiarEstado()
-                }, 2000)
-            })
-            MocAsync.then(items => {
-                setItems(items)
-            })
-        }
+        // 1) Necesito referencia de la colección
+        const ref = resultado.id
+        ? query(collectionProd, where('categoria', '==', resultado.id))
+        : collectionProd;
+        console.log("resultado: ",resultado.id)
+        // 2) Hago la consulta
+        getDocs(ref).then((response) => {
+            const products = response.docs.map((doc) => {
+                return {
+                    id: doc.id,
+                    ...doc.data(),
+                }
+            });
+            setItems(products)
+            setLoading(false);
+        })        
+        .catch( (error) => {
+            console.log(error)
+        })
 
     },[resultado.id])
 
@@ -63,9 +58,6 @@ const ItemListContainer = () => {
             :
             <div className="container">
                 <div className="row text-center">
-                    {/* {
-                        items?.length < 0 ? <p>No hay nada che</p> : <ItemList productos={items} />
-                    } */}
                     <ItemList productos={items} />
                 </div>
             </div>
