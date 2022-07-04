@@ -11,7 +11,7 @@ const item = ({nombre, precio, stock, portada, id}) => {
             </div>
             <div className="col p-4 pt-1 d-flex flex-column position-static producto">
                 <h3 className="fs-5 tmb-0 mt-2">{nombre } <small>({stock})</small></h3>
-                <p className="card-text mb-auto"><b>{precio}</b></p>
+                <p className="card-text mb-auto"><b>${precio}</b></p>
                 <Link to={`/item/${id}`} className="btn btn-primary mt-3">Ver detalle </Link>
             </div>
         </div>

@@ -21,7 +21,6 @@ const ItemListContainer = () => {
         const ref = resultado.id
         ? query(collectionProd, where('categoria', '==', resultado.id))
         : collectionProd;
-        console.log("resultado: ",resultado.id)
         // 2) Hago la consulta
         getDocs(ref).then((response) => {
             const products = response.docs.map((doc) => {

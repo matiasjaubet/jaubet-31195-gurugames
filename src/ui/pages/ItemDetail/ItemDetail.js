@@ -56,7 +56,7 @@ const ItemDetail = ({item}) => {
             <div className="col-md-2">
                 <div className="row g-0 rounded overflow-hidden mb-4 h-md-250 position-relative">
                     <div className="col p-4 pt-10 d-flex flex-column text-left">
-                        <p className="card-text mb-auto precio font-weight-bold">{item.precio}</p>
+                        <p className="card-text mb-auto precio font-weight-bold">${item.precio}</p>
                      
                         {cantidad.length !== 0  
                         ?

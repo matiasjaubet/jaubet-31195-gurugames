@@ -58,14 +58,39 @@ const CartContext = ({children}) => {
         setCantidad_total(cantidad_total - quantity)
     }
 
+    // SUMAR EL TOTAL DE PEDIDO
+
+    const totalPrice = () => {
+
+        console.log("CARRITO: ", carrito)
+
+        const precioTotalProducto = carrito.map((prod) => {
+
+            const uno = prod.quantity * prod.item.precio;
+
+            console.log("UNO: " , uno)
+
+          })
+        return precioTotalProducto;
+    }
+
+
+    // VACIAR CARRITO
+
+    const deleteAll = () => setCarrito([])
+
     // VALOR DEL CONTEXTO (PROPS)
 
     const valorDelContexto = {
         quantity: cantidad_total,
         item: carrito,
-        addGame : addGame,
+        addGame    : addGame,
         removeItem : removeItem,
+        deleteAll  : deleteAll,
+        totalPrice : totalPrice,
     }
+
+
 
     return (
         <Provider value={valorDelContexto}>

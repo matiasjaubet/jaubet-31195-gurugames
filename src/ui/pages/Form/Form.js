@@ -1,21 +1,8 @@
 import { useState } from "react"
 
-const Form = () => {
+const Form = ({handleChange, handleSubmit, usuario}) => {
 
-    const [usuario, setUsuario] = useState({
-        nombre: "",
-        telefono: "",
-        email: ""
-    })
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
-    const handleChange = (e) => {
-        const copia = {...usuario}
-        copia[e.target.id] = e.target.value
-        setUsuario(copia)
-        console.log(usuario)
-    }
+    
     return (
     <>
         <div className="container mt-5">
@@ -24,7 +11,7 @@ const Form = () => {
             <form onSubmit={handleSubmit}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 col-sm-4 mb-3">
+                        <div className="col-12 col-sm-4 mb-3"> 
                             <input onChange={handleChange} id="nombre" autoComplete="off" type="text" className="form-control" placeholder="Nombre y Apellido" />
                         </div>
                         <div className="col-12 col-sm-4 mb-3">
