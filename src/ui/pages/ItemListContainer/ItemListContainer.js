@@ -17,11 +17,10 @@ const ItemListContainer = () => {
 
     useEffect(() => {
      
-        // 1) Necesito referencia de la colección
         const ref = resultado.id
         ? query(collectionProd, where('categoria', '==', resultado.id))
         : collectionProd;
-        // 2) Hago la consulta
+
         getDocs(ref).then((response) => {
             const products = response.docs.map((doc) => {
                 return {

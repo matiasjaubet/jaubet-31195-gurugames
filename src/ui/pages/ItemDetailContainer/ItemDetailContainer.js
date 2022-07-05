@@ -10,7 +10,6 @@ const ItemDetailContainer = () => {
 
     const [item, setItem] = useState({});
     const {id} = useParams();
-    // const idToNumber = parseInt(id);
     useEffect(() => {
 
         const ref = doc(collectionProd, id);

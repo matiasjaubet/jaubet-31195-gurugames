@@ -16,8 +16,6 @@ const ItemDetail = ({item}) => {
         resultado.addGame(item, quantity);
     }
 
-    // SPINNER / LOADING
-
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
