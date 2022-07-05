@@ -1,4 +1,3 @@
-
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { context } from "../../../api/CartContext/CartContext";
@@ -12,7 +11,7 @@ const Carrito = () => {
   const resultado = useContext(context);
   const todos = resultado.item;
   const [carrito, setCarrito] = useState(false);
-  
+
   const estadoCarrito = resultado.item.length;
   useEffect(() => {
     if (estadoCarrito === 0) {
@@ -36,7 +35,7 @@ const Carrito = () => {
 
   const handleSubmit = (e) => {
 
-    const formatedCart = todos.map((prod) => {
+    const detalle = todos.map((prod) => {
       return {
         id: prod.item.id,
         nombre: prod.item.nombre,
@@ -47,14 +46,17 @@ const Carrito = () => {
     e.preventDefault();
 
     const objOrden = {
-      buyer:{
+      Cliente:{
         nombre: usuario.nombre,
         telefono: usuario.telefono,
         email: usuario.email
       },
-      formatedCart,
-      date: serverTimestamp()
+      detalle,
+      Total: `$ ${resultado.totalPrice()}`,
+      Fecha: serverTimestamp()
     }
+
+
 
     const ref = collection(db, 'orders');
     addDoc(ref, objOrden)
@@ -99,7 +101,6 @@ const Carrito = () => {
                     </tr>
                 </thead>
                 <tbody>
-
                 {
                     todos.map((juego) => {
                         return (
@@ -107,7 +108,7 @@ const Carrito = () => {
                             <td className="align-middle">{juego.quantity}</td>
                             <td className="align-middle"><Link to={`/item/${juego.item.id}`}><img src={juego.item.portada} alt="" className="portada" /></Link></td>
                             <td className="align-middle">{juego.item.nombre}</td>
-                            <td className="align-middle">{juego.item.precio}</td>
+                            <td className="align-middle">$ {juego.item.precio}</td>
                             <td className="align-middle"><Link to="" onClick={() => resultado.removeItem(juego.item.id, juego.quantity)}><i className="bi bi-x-lg"></i></Link></td>
                         </tr>
                         )
@@ -115,6 +116,10 @@ const Carrito = () => {
                 }
                 </tbody>
             </table>
+
+            <div className="container pt-4">
+              <p>El precio final de tu compra es: <b>$ {resultado.totalPrice()}</b></p>
+            </div>
 
             <Form
             handleChange={handleChange}

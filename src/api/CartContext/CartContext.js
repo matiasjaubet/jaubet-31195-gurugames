@@ -9,6 +9,7 @@ const CartContext = ({children}) => {
 
     const [cantidad_total, setCantidad_total] = useState(0);
     const [carrito, setCarrito] = useState([]);
+    const [costoTotal, setCostoTotal] = useState([]);
 
 
     // AGREGAR PRODUCTO Y CHEQUEAR QUE NO ESTE REPETIDO
@@ -23,7 +24,7 @@ const CartContext = ({children}) => {
             // AGREGAMOS EL PRODUCTO DE UNA Y SUMAMOS LA CANTIDAD AL WIDGETCART
             setCarrito(current => [...current, nuevoJuego]);
             setCantidad_total(cantidad_total + quantity);
-        
+
         // SI NO ESTÁ VACIO...
         } else {
 
@@ -61,18 +62,21 @@ const CartContext = ({children}) => {
     // SUMAR EL TOTAL DE PEDIDO
 
     const totalPrice = () => {
+        const costoProducto = carrito.map((prod) => {
+            const cadaProducto = prod.quantity * prod.item.precio;
+            return cadaProducto;
+        })
 
-        console.log("CARRITO: ", carrito)
+        let total = 0;
+        // console.log("ASDsadas : ", costoProducto);
 
-        const precioTotalProducto = carrito.map((prod) => {
-
-            const uno = prod.quantity * prod.item.precio;
-
-            console.log("UNO: " , uno)
-
-          })
-        return precioTotalProducto;
+        for (let i = 0; i < costoProducto.length; i++) {
+            total += costoProducto[i];
+        }
+        // setCostoTotal(total);
+        return total
     }
+
 
 
     // VACIAR CARRITO
